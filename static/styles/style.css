@@ -1,0 +1,61 @@
+/*Written with help from ChatGPT*/
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background: linear-gradient(to bottom, #DDE2FF, #E1FDFF);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+
+.form-wrapper {
+	background-color: #B4E8FF;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+	margin-top: 100px;
+}
+
+.form-wrapper h2 {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+.form-control {
+	margin-bottom: 15px;
+	border-radius: 5px;
+}
+
+.btn-submit {
+	background-color: #0094FF;
+	color: #fff;
+	margin-right: 10px;
+	border-radius: 5px;
+	border: none;
+	padding: 8px 20px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.btn-register {
+	background-color: #0094FF;
+	color: #fff;
+	border-radius: 5px;
+	border: none;
+	padding: 8px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.btn-register:hover {
+	text-decoration: none;
+}

@@ -16,6 +16,18 @@ def login():
 def register():
     return render_template("register.html")
 
+@app.route("/home", methods=["GET", "POST"])
+def home():
+    return render_template("home.html")
+
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    return render_template("add.html")
+
+@app.route("/edit", methods=["GET", "POST"])
+def edit():
+    return render_template("edit.html")
+
 if __name__ == "__main__":
     init_db()
     app.run(debug=True)

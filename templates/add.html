@@ -1,0 +1,33 @@
+<!-- Written with help from ChatGPT -->
+
+{% extends "base.html" %}
+{% block title%}Add Task{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-md-6">
+    <div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Add Task</h5>
+    </div>
+    <div class="card-body">
+        <form>
+        <div class="form-group">
+            <label for="taskName">Task Name</label>
+            <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
+        </div>
+        <div class="form-group">
+            <label for="dueDate">Due Date</label>
+            <input type="date" class="form-control" id="dueDate" placeholder="Enter due date">
+        </div>
+        <div class="form-group">
+            <label for="timeNeeded">Time Needed (minutes)</label>
+            <input type="number" class="form-control" id="timeNeeded" placeholder="Enter time needed">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+        <a href="#" class="btn btn-secondary ml-2">Cancel</a>
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+{%endblock%}

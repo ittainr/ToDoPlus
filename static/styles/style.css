@@ -12,7 +12,10 @@ html, body {
     background-size: cover;
     background-position: center;
   }
-  
+
+a {
+    color: white;
+}  
 
 .form-wrapper {
 	background-color: #B4E8FF;

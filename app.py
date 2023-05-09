@@ -65,7 +65,17 @@ def add():
 
 @app.route("/edit", methods=["GET", "POST"])
 def edit():
-    return render_template("edit.html")
+    if request.method=="GET":
+        task_id = request.args["task-id"]
+        return render_template("edit.html", task_id=task_id)
+    elif request.method=="POST":
+        task_id = request.form["task-id"]
+        task = db_session.query(Task).where(Task.id==task_id).all()[0]
+        task.task_name=request.form["task-name"]
+        task.due_date=datetime.strptime(request.form["due-date"], "%Y-%m-%d").date()
+        task.time_needed=request.form["time-needed"]
+        db_session.commit()
+        return redirect(url_for("home"))
 
 if __name__ == "__main__":
     init_db()

@@ -7,41 +7,23 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Your Tasks</a>
         <span class="navbar-text mx-auto">Spend XX:XX more today</span>
-        <button type="button" class="btn btn-primary">+ Add Task</button>
+        <button type="button" class="btn btn-primary"><a href="add">+ Add Task</a></button>
     </div>
 </nav>
 
 <div class="container mt-5">
 <hr>
-<div class="row mb-3">
-    <div class="col">Task 1</div>
-    <div class="col">1h</div>
-    <div class="col">Tomorrow</div>
-    <div class="col">
-    <button class="btn btn-outline-primary me-2">Spend Time</button>
-    <button class="btn btn-outline-primary">Edit Task</button>
-    </div>
-</div>
-<hr>
-<div class="row mb-3">
-    <div class="col">Task 2</div>
-    <div class="col">30m</div>
-    <div class="col">Today</div>
-    <div class="col">
+{% for task in tasks %}
+    <div class="row mb-3">
+        <div class="col">{{task.task_name}}</div>
+        <div class="col">{{task.time_needed}}</div>
+        <div class="col">{{task.due_date}}</div>
+        <div class="col">
         <button class="btn btn-outline-primary me-2">Spend Time</button>
         <button class="btn btn-outline-primary">Edit Task</button>
+        </div>
     </div>
-</div>
-<hr>
-<div class="row mb-3">
-    <div class="col">Task 3</div>
-    <div class="col">2h</div>
-    <div class="col">2 days</div>
-    <div class="col">
-        <button class="btn btn-outline-primary me-2">Spend Time</button>
-        <button class="btn btn-outline-primary">Edit Task</button>
-    </div>
-</div>
-<hr>
+    <hr>
+{% endfor %}
 </div>
 {% endblock %}

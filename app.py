@@ -1,12 +1,11 @@
 from flask import *
 from database import init_db, db_session
 from models import *
+from datetime import datetime
 
 app = Flask(__name__)
 
-# TODO: Change the secret key
-app.secret_key = "Change Me"
-user = None
+app.secret_key = '\xfd{H\xe5<\x95\xf9\xe3\x96.5\xd1\x01O<!\xd5\xa2\xa0\x9fR"\xa1\xa8'
 
 # TODO: Fill in methods and routes
 @app.route("/", methods=["GET", "POST"])
@@ -17,7 +16,7 @@ def login():
         username=request.form["username"]
         password=request.form["password"]
         for u in db_session.query(User).where(User.username==username and User.password==password).all():
-            user = u
+            session["user"] = {"username":username, "password":password}
             return redirect(url_for("home"))
         return render_template("index.html")
 
@@ -30,19 +29,33 @@ def register():
         password=request.form["password"]
         confirm_password=request.form["confirm-password"]
         if password==confirm_password and len(db_session.query(User).where(User.username==username).all())==0:
-            user = User(username=username, password=password)
-            db_session.add(user)
+            session["user"] = {"username":username, "password":password}
+            db_session.add(User(username=username, password=password))
             db_session.commit()
             return redirect(url_for("home"))
         return render_template("register.html")
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    return render_template("home.html")
+    user = session.get("user")
+    if user:
+        username = user["username"]
+        tasks = db_session.query(Task).where(Task.user_username==username).all()
+        return render_template("home.html", tasks=tasks)
+    else:
+        return redirect(url_for("login"))
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
-    return render_template("add.html")
+    if request.method=="GET":
+        return render_template("add.html")
+    elif request.method=="POST":
+        user = db_session.query(User).where(User.username==session.get("user")["username"] and User.password==session.get("user")["password"]).all()[0]
+        new_task = Task(task_name=request.form["task-name"], due_date=datetime.strptime(request.form["due-date"], "%Y-%m-%d").date(), time_needed=request.form["time-needed"], user_username=user.username)
+        db_session.add(new_task)
+        user.tasks.append(new_task)
+        db_session.commit()
+        return redirect(url_for("home"))
 
 @app.route("/edit", methods=["GET", "POST"])
 def edit():

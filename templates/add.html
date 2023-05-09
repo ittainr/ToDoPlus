@@ -10,21 +10,21 @@
         <h5 class="card-title">Add Task</h5>
     </div>
     <div class="card-body">
-        <form>
+        <form method="post">
         <div class="form-group">
             <label for="taskName">Task Name</label>
-            <input type="text" class="form-control" id="taskName" placeholder="Enter task name">
+            <input type="text" class="form-control" id="task-name" name="task-name" placeholder="Enter task name">
         </div>
         <div class="form-group">
             <label for="dueDate">Due Date</label>
-            <input type="date" class="form-control" id="dueDate" placeholder="Enter due date">
+            <input type="date" class="form-control" id="due-date" name="due-date" placeholder="Enter due date">
         </div>
         <div class="form-group">
             <label for="timeNeeded">Time Needed (minutes)</label>
-            <input type="number" class="form-control" id="timeNeeded" placeholder="Enter time needed">
+            <input type="number" class="form-control" id="time-needed" name="time-needed" placeholder="Enter time needed">
         </div>
         <button type="submit" class="btn btn-primary">Add Task</button>
-        <a href="#" class="btn btn-secondary ml-2">Cancel</a>
+        <a href="home" class="btn btn-secondary ml-2">Cancel</a>
         </form>
     </div>
     </div>

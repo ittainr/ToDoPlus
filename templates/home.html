@@ -16,11 +16,17 @@
 {% for task in tasks %}
     <div class="row mb-3">
         <div class="col">{{task.task_name}}</div>
-        <div class="col">{{task.time_needed}}</div>
-        <div class="col">{{task.due_date}}</div>
+        <div class="col">{{task.time_needed}} minutes</div>
+        <div class="col">Do by {{task.due_date}}</div>
         <div class="col">
-        <button class="btn btn-outline-primary me-2">Spend Time</button>
-        <button class="btn btn-outline-primary">Edit Task</button>
+        <form method="post">
+            <input type="hidden" name="task-id" value="{{task.id}}">
+            <button type="submit" class="btn btn-outline-primary me-2">Clear Task</button>
+        </form>
+        <form method="post" action="/edit">
+            <input type="hidden" name="task-id" value="{{task.id}}">
+            <button type="submit" class="btn btn-outline-primary">Edit Task</button>
+        </form>
         </div>
     </div>
     <hr>

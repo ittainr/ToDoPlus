@@ -37,13 +37,19 @@ def register():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    user = session.get("user")
-    if user:
-        username = user["username"]
-        tasks = db_session.query(Task).where(Task.user_username==username).all()
-        return render_template("home.html", tasks=tasks)
-    else:
-        return redirect(url_for("login"))
+    if request.method=="GET":
+        user = session.get("user")
+        if user:
+            username = user["username"]
+            tasks = db_session.query(Task).where(Task.user_username==username).all()
+            return render_template("home.html", tasks=tasks)
+        else:
+            return redirect(url_for("login"))
+    elif request.method=="POST":
+        task_id = request.form["task-id"]
+        db_session.delete(db_session.query(Task).where(Task.id==task_id).all()[0])
+        db_session.commit()
+        return render_template("home.html", tasks=db_session.query(Task).where(Task.user_username==session.get("user")["username"]).all())
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
